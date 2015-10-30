@@ -1,5 +1,5 @@
-$(".todo_description").val("")
-$(".todo_title").val("")
+$("#todo_description").val("")
+$("#todo_title").val("")
 $(".creatjs").empty()
 
 $(".creatjs").html("<%= escape_javascript(render :partial => 'todos/listTodos', :locals => { :project => @project }) %>")

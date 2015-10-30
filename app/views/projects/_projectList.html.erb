@@ -1,11 +1,11 @@
-<table class="table table-bordered hover">
+<table class="table table-hover table-striped">
     <thead>
       <tr>
         <th>Name</th>
         <th>Description</th>
         <th>Created</th>
         <th>Status</th>
-        <th>Number of Tasks</th>
+        <th>Tasks</th>
         <th colspan="3"></th>
       </tr>
     </thead>
@@ -13,14 +13,16 @@
     <tbody>
       <% projects.each do |project| %>
         <tr>
-          <td><%= link_to project.name, project %></td>
+          <td><%= link_to project do %><%= fa_icon 'eye' %><%= project.name %><% end %></td>
           <td><%= project.Description %></td>
           <td><%= project.created_at.strftime(" %I:%M%p on %m/%d/%Y")  %></td>
           <td>On going</td>
-          <td class="text-right">30</td>
-          <td><%= link_to 'Edit', edit_project_path(project) %></td>
-          <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= project.todos.count =%></td>
+          <td><%= link_to edit_project_path(project),  :remote => true do %><%= fa_icon 'pencil-square-o' %><% end %></td>
+          <td><%= link_to project, method: :delete, data: { confirm: 'Are you sure?' } do %><%= fa_icon 'trash-o' %><% end %></td>
         </tr>
       <% end %>
     </tbody>
 </table>
+
+<!-- <i class="fa fa-eye"></i> -->

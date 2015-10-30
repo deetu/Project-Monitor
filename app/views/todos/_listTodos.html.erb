@@ -17,7 +17,7 @@
 
 
     <tbody>
-      <% project.todos.reverse_each do |todo| %>
+      <% project.todos(true).reverse_each do |todo| %>
         <tr>
           <td><%= todo.title %></td>
           <td><%= todo.description %></td>
