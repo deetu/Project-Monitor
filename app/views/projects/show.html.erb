@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<p>
+<!-- <p>
   <strong>Name:</strong>
   <%= @project.name %>
 </p>
@@ -8,7 +8,44 @@
 <p>
   <strong>Description:</strong>
   <%= @project.Description %>
-</p>
+</p> -->
 
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+
+<div class="row">
+  <div class="hero-unit text-center well">
+        <h1><%= @project.name %></h1>
+        <p><%= @project.Description %></p>
+      </div>
+
+</div>
+<div class="row">
+	<div class="col-xs-6 col-md-4  well">
+<h4 class="text-center">Add task</h4>
+<%= form_for([@project, @project.todos.build], remote: true) do |f| %>
+  <p>
+    <%= f.text_field :title, :required => true, autofocus: true, placeholder: 'Title', class: 'form-control', :size=>"64"%>
+  </p>
+  <p>
+    <%= f.text_area :description, cols: "65", rows: "10", placeholder: 'Description', class: 'form-control'%>
+  </p>
+  <p>
+    <%= f.check_box :status , :style => 'visibility: hidden'%>
+  </p>
+  <p>
+    <%= button_tag(:type => 'submit', :class => 'btn btn-primary btn-xs submit pull-right', remote: true) do %>Submit<% end %>
+  </p>
+<% end %>
+
+	</div>
+	
+<!-- 	<div class="col-xs-6 col-md-4 well">
+		<h4>Percentage</h4>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+
+	</div> -->
+	<div class="col-xs-6 col-md-7  col-lg-offset-1 well creatjs">
+          <%= render :partial => 'todos/listTodos', :locals => { :project => @project } %>
+	</div>
+
+</div>
+

@@ -1,0 +1,31 @@
+<h4 class="text-center">Logged task (<%= project.todos.count =%>)</h4>
+<% if project.todos.count == 0 %>
+
+<p class="text-centre">No task added yet</p>
+
+<% else %>
+
+
+  <table class="table table-bordered hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Completed ?</th>
+      </tr>
+    </thead>
+
+
+    <tbody>
+      <% project.todos.reverse_each do |todo| %>
+        <tr>
+          <td><%= todo.title %></td>
+          <td><%= todo.description %></td>
+          <td><%= check_box_tag "Change Status", todo.title, todo.status -%></td>
+        </tr>
+      <% end %>
+    </tbody>
+</table>
+
+
+<% end %>

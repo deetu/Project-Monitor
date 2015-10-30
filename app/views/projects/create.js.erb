@@ -1,4 +1,4 @@
 $("#myModal").modal('hide');
 $(".projectsList").empty()
 
-$(".projectsList").html("<%= escape_javascript(render :partial => 'projectList', :locals => { :projects => @projects }) %>")
+$(".projectsList").html("<%= escape_javascript(render :partial => 'projectList', :locals => { :project => @project }) %>")
