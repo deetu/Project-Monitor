@@ -4,6 +4,16 @@
 <p class="text-centre">No task added yet</p>
 
 <% else %>
+  <% @ratio = project.todos.group(:status).count %>
+  <div class="row">
+    <div class="col-md-6">
+      <h6 class="text-center">Completed:  <%= @ratio[true] ? @ratio[true] : "None" %></h6>
+    </div>
+
+    <div class="col-md-6">
+      <h6 class="text-center">Outstanding:  <%= @ratio[false] ? @ratio[false] : "None" %></h6>
+    </div>
+  </div>
 
 
   <table class="table table-bordered hover">
@@ -18,7 +28,7 @@
 
     <tbody>
       <% project.todos(true).reverse_each do |todo| %>
-        <tr>
+        <tr class="<%= todo.status ? 'adminUser' : 'normalUser' %>">
           <td><%= todo.title %></td>
           <td><%= todo.description %></td>
           <td><%= check_box_tag "Change Status", todo.title, todo.status -%></td>

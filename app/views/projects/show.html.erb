@@ -1,14 +1,22 @@
+<script type="text/javascript">
+
+$(function (){ 
+  $(document).on("change", 'input[type=checkbox]', function(){
+    var rowId = $(this).closest("tr").find("td")[1].innerText
+    var isChecked = $(this)[0].checked
+    $.ajax({
+            url: '/projects/updateStatus ',
+            type: 'POST',
+            data: { "rowId": rowId, "isChecked": isChecked },
+
+    });
+  });
+
+});
+
+</script>
+
 <p id="notice"><%= notice %></p>
-
-<!-- <p>
-  <strong>Name:</strong>
-  <%= @project.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @project.Description %>
-</p> -->
 
 
 <div class="row">
@@ -37,12 +45,7 @@
 <% end %>
 
 	</div>
-	
-<!-- 	<div class="col-xs-6 col-md-4 well">
-		<h4>Percentage</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
 
-	</div> -->
 	<div class="col-xs-6 col-md-7  col-lg-offset-1 well creatjs">
           <%= render :partial => 'todos/listTodos', :locals => { :project => @project } %>
 	</div>

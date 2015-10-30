@@ -38,6 +38,23 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def updateStatus
+    @todo = Todo.find_by(description: params[:rowId])
+    @project = Project.find(@todo.project_id)
+    puts @project.to_s
+    respond_to do |format|
+      if @todo.update_attribute(:status, params[:isChecked])
+        format.js { render :file => "/todos/create.js.erb" }
+        # format.html { redirect_to root_path }
+      else
+        format.html { render :edit }
+        format.json { render json: @invoice.errors, status: :unprocessable_entity }
+      end
+    
+    end
+    # @users = User.all
+  end
+
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
