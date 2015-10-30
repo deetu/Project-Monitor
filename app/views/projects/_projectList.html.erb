@@ -1,4 +1,4 @@
-<table class="table table-hover table-striped">
+<table class="table table-hover table-striped well">
     <thead>
       <tr>
         <th>Name</th>
@@ -15,7 +15,7 @@
       <% @ratio = project.todos.group(:status).count %>
         <tr>
           <td><%= link_to project do %><%= fa_icon 'eye' %><%= project.name %><% end %></td>
-          <td><%= project.Description %></td>
+          <td class="col-md-6" align="justify"><%= project.Description %></td>
           <td><%= project.created_at.strftime(" %I:%M%p on %m/%d/%Y")  %></td>
 
           <% if @ratio[true] &&  (@ratio[true] == project.todos.count) %>
