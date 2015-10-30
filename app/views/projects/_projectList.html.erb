@@ -12,11 +12,19 @@
 
     <tbody>
       <% projects.each do |project| %>
+      <% @ratio = project.todos.group(:status).count %>
+      <% puts @ratio[true].class %>
+      <% puts project.todos.count.class %>
         <tr>
           <td><%= link_to project do %><%= fa_icon 'eye' %><%= project.name %><% end %></td>
           <td><%= project.Description %></td>
           <td><%= project.created_at.strftime(" %I:%M%p on %m/%d/%Y")  %></td>
-          <td>On going</td>
+
+          <% if @ratio[true] &&  (@ratio[true] == project.todos.count) %>
+              <td>Completed</td>
+          <% else %>
+               <td>Still in progress</td>
+          <%end%>
           <td><%= project.todos.count =%></td>
           <td><%= link_to edit_project_path(project),  :remote => true do %><%= fa_icon 'pencil-square-o' %><% end %></td>
           <td><%= link_to project, method: :delete, data: { confirm: 'Are you sure?' } do %><%= fa_icon 'trash-o' %><% end %></td>
@@ -24,5 +32,3 @@
       <% end %>
     </tbody>
 </table>
-
-<!-- <i class="fa fa-eye"></i> -->
