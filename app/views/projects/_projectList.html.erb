@@ -13,8 +13,6 @@
     <tbody>
       <% projects.each do |project| %>
       <% @ratio = project.todos.group(:status).count %>
-      <% puts @ratio[true].class %>
-      <% puts project.todos.count.class %>
         <tr>
           <td><%= link_to project do %><%= fa_icon 'eye' %><%= project.name %><% end %></td>
           <td><%= project.Description %></td>
