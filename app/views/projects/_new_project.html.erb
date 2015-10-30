@@ -1,0 +1,40 @@
+
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">New Project</h4>
+      </div>
+            <%= form_for(project, remote: true, :html => {:class => "form-inline"}) do |f| %>
+                <% if project.errors.any? %>
+                  <div id="error_explanation">
+                    <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+                    <ul>
+                    <% project.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                    <% end %>
+                    </ul>
+                  </div>
+                <% end %>
+          <div class="modal-body">
+            <div class="field">
+              <%= f.text_field :name, :required => true, autofocus: true, placeholder: 'Title', class: 'form-control', :size=>"64"%>
+            </div>
+            <div class="field">
+              <%= f.text_area :Description, cols: "65", rows: "10", placeholder: 'Description', class: 'form-control' %>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <div class="actions">
+              <%= button_tag(:type => 'submit', :class => 'btn btn-primary btn-xs submit pull-right', remote: true) do %>Submit<% end %>
+            </div>
+            
+          </div>
+      <% end %>
+    </div>
+
+  </div>
+</div>

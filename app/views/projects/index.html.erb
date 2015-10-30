@@ -1,29 +1,19 @@
+
 <p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="hero-unit text-center well">
+        <h1>Project Monitor</h1>
+        <p>This is a simple app created, so i can monitor the progress of my web application development. with this app i can easily create a todo list wheneven i remeber and i can monitor the progress of each app.</p>
+        <%= link_to 'Create New Project', new_project_path, :class => 'btn btn-info btn-xs', remote: true  %>
+      </div>
 
-<h1>Listing Projects</h1>
+</div>
+<div class="row">
+  <h1>My Projects</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <div class="projectsList">
+    <%= render :partial => 'projectList', :locals => { :projects => @projects } %>
+  </div>
+<div id="myModal" class="modal fade" role="dialog"></div>
 
-  <tbody>
-    <% @projects.each do |project| %>
-      <tr>
-        <td><%= project.name %></td>
-        <td><%= project.Description %></td>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Project', new_project_path %>
+</div>
