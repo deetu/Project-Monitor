@@ -1,4 +1,5 @@
-<table class="table table-hover table-striped well">
+<div class="col-md-7 well">
+<table class="table table-striped">
     <thead>
       <tr>
         <th>Name</th>
@@ -14,8 +15,8 @@
       <% projects.each do |project| %>
       <% @ratio = project.todos.group(:status).count %>
         <tr>
-          <td><%= link_to project do %><%= fa_icon 'eye' %><%= project.name %><% end %></td>
-          <td class="col-md-6" align="justify"><%= project.Description %></td>
+          <td><%= project.name %></td>
+          <td class="col-md-6 hider" align="justify"><%= project.Description %></td>
           <td><%= project.created_at.strftime(" %I:%M%p on %m/%d/%Y")  %></td>
 
           <% if @ratio[true] &&  (@ratio[true] == project.todos.count) %>
@@ -24,9 +25,11 @@
                <td>Still in progress</td>
           <%end%>
           <td><%= project.todos.count =%></td>
+          <td><%= link_to project do %><%= fa_icon 'television' %><% end %></td>
           <td><%= link_to edit_project_path(project),  :remote => true do %><%= fa_icon 'pencil-square-o' %><% end %></td>
           <td><%= link_to project, method: :delete, data: { confirm: 'Are you sure?' } do %><%= fa_icon 'trash-o' %><% end %></td>
         </tr>
       <% end %>
     </tbody>
 </table>
+</div>

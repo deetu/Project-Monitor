@@ -1,7 +1,32 @@
+<script type="text/javascript">
+
+$(function (){ 
+	  // $('th').find('td:eq(1), td:eq(2)').hide();
+	  $('tr').find('td:eq(1), th:eq(1)').hide();
+	  
+	  $(document).on("mouseenter", 'tr:not(:eq(0))', function(){
+	  	$(this).css('cursor','pointer');
+	  	$(this).each (function() {
+		  	var row = $(this).closest('tr');
+		  	var rowText = row[0].childNodes[3].innerHTML;
+		  	var rowHeader = row[0].childNodes[1].innerHTML;
+		  	$('.showDescription').find('#headerText').val("");
+		  	$('.showDescription').find('#bodyText').val("");
+		  	$('.showDescription').find('#headerText').text(rowHeader);
+		  	$('.showDescription').find('#bodyText').text(rowText);
+
+		});
+	  });
+
+});
+
+</script>
+
+
 
 <p id="notice"><%= notice %></p>
 <div class="row">
-  <div class="hero-unit text-center well">
+  <div class="hero-unit text-center well homeBackground">
         <h1>Project Monitor</h1>
         <p>This is a simple app created, so i can monitor the progress of my web application development. with this app i can easily create a todo list wheneven i remeber and i can monitor the progress of each app.</p>
         <%= link_to 'Create New Project', new_project_path, :class => 'btn btn-info btn-xs', remote: true  %>
@@ -9,10 +34,13 @@
 
 </div>
 <div class="row">
-<!--   <h1>My Projects</h1> -->
 
   <div class="projectsList">
     <%= render :partial => 'projectList', :locals => { :projects => @projects } %>
+  </div>
+  <div class="col-md-4 well showDescription col-md-offset-1">
+  	<div id="headerText"></div>
+  	<div id="bodyText"></div>
   </div>
 <div id="myModal" class="modal fade" role="dialog"></div>
 
