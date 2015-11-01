@@ -1,3 +1,27 @@
+<script type="text/javascript">
+
+$(function (){ 
+  var ratio = <%= project.todos.group(:status).count.to_json.html_safe  %>
+  var total;
+  var percentage;
+ 
+  if (ratio.hasOwnProperty("true") && ratio.hasOwnProperty("false")) {
+    total = ratio[true] + ratio[false];
+    percentage = ((ratio[true]/total) * 100).toFixed(1) + "%";
+    $('.progressUpdate').css("width", percentage).text((percentage + " Complete"))
+  } else  if (ratio[true] && !ratio.hasOwnProperty("false")){
+
+    $('.progressUpdate').css("width", "100%").text(("100%" + " Complete"))
+  } else if(ratio[false] && !ratio.hasOwnProperty("true")) {
+    console.log("no")
+    $('.progressUpdate').css("width", "10%").text(("0%" + " Complete"))
+  }
+
+  
+});
+
+</script>
+
 <h4 class="text-center">Logged task (<%= project.todos.count =%>)</h4>
 <% if project.todos.count == 0 %>
 
@@ -6,11 +30,17 @@
 <% else %>
   <% @ratio = project.todos.group(:status).count %>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
+      <div class="progress">
+        <div class="progress-bar progress-bar-success progress-bar-striped progressUpdate" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+        </div>
+      </div> 
+    </div>
+    <div class="col-md-4">
       <h6 class="text-center">Completed:  <%= @ratio[true] ? @ratio[true] : "None" %></h6>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-4">
       <h6 class="text-center">Outstanding:  <%= @ratio[false] ? @ratio[false] : "None" %></h6>
     </div>
   </div>
