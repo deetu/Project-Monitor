@@ -73,7 +73,13 @@ div {
 }
 .homeBackground {
   background-color: #155f6f;
-  color: #f48472
+  color: #f48472;
+}
+.homeBackground h1 {
+
+  font-family: 'Tangerine';
+  font-size: 80px;
+  text-shadow: 4px 4px 4px black;
 }
 #headerText{
   text-decoration: underline;

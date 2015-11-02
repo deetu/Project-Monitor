@@ -10,14 +10,10 @@ $(function (){
     percentage = ((ratio[true]/total) * 100).toFixed(1) + "%";
     $('.progressUpdate').css("width", percentage).text((percentage + " Complete"))
   } else  if (ratio[true] && !ratio.hasOwnProperty("false")){
-
     $('.progressUpdate').css("width", "100%").text(("100%" + " Complete"))
   } else if(ratio[false] && !ratio.hasOwnProperty("true")) {
-    console.log("no")
     $('.progressUpdate').css("width", "10%").text(("0%" + " Complete"))
   }
-
-  
 });
 
 </script>
