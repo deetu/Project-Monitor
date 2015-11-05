@@ -29,8 +29,9 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
+        format.html {  }
         format.js {}
+        flash.now[:notice] = 'Project was successfully created.'
       else
         format.html { render :new }
         format.json { render json: @project.errors, status: :unprocessable_entity }
@@ -76,8 +77,9 @@ class ProjectsController < ApplicationController
   def destroy
     @project.destroy
     respond_to do |format|
-      format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
+      format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.'  }
       format.json { head :no_content }
+      # flash.now[:notice] = 'Project was successfully destroyed.'
     end
   end
 
