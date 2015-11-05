@@ -1,14 +1,23 @@
 <script type="text/javascript">
 
 $(function (){ 
-    // $('th').find('td:eq(1), td:eq(2)').hide();
-    $('tr').find('td:eq(1), th:eq(1)').hide();
+
+    $(".projectView").on("mouseenter", function(){
+      $(this).css('cursor','pointer');
+        var row = $(this)[0].children[0].innerHTML;
+        var rowText = $(this)[0].children[3].innerHTML;
+        $('.showDescription').find('#headerText').val("");
+        $('.showDescription').find('#bodyText').val("");
+        $('.showDescription').find('#headerText').text(row);
+        $('.showDescription').find('#bodyText').text(rowText);
+    })
+
 
 });
 
 </script>
-<div class="col-md-7 well">
-<table class="table table-striped">
+<div class="col-md-8 well">
+<!-- <table class="table table-striped">
     <thead>
       <tr>
         <th>Name</th>
@@ -40,5 +49,28 @@ $(function (){
         </tr>
       <% end %>
     </tbody>
-</table>
+</table> -->
+    <% projects.each do |project| %>
+      <% @ratio = project.todos.group(:status).count %>
+        <div class="projectView col-md-4">
+          <u class="text-center"><%= project.name %></u></br>
+          Crceated: <%= project.created_at.strftime("%m/%d/%Y")  %></br>
+          <div style="display: none" align="justify"><%= project.Description %></div>
+          Status: <% if @ratio[true] &&  (@ratio[true] == project.todos.count) %>
+              <td>Completed</td>
+          <% else %>
+               <td>In progress</td>
+          <%end%>
+          <div class="moveBottom">
+            <span class="fa-stack"><i class="fa fa-file-o fa-stack-2x"></i>
+              <strong class="fa-stack-1x fa-stack-text file-text"><%= project.todos.count =%></strong>
+            </span>
+          </div>
+          <div class="moveIconBottom">
+            <div class="col-sm-4"><%= link_to project do %><%= fa_icon 'television color' %><% end %></div>
+            <div class="col-sm-4"><%= link_to edit_project_path(project),  :remote => true do %><%= fa_icon 'pencil-square-o color' %><% end %></div>
+            <div class="col-sm-4"><%= link_to project, method: :delete, data: { confirm: 'Are you sure?' } do %><%= fa_icon 'trash-o color' %><% end %></div>
+          </div>
+        </div>
+      <% end %>
 </div>
