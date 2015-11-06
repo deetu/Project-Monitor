@@ -62,7 +62,7 @@ class ProjectsController < ApplicationController
     @projects = Project.all
     respond_to do |format|
       if @project.update(project_params)
-        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
+        format.html { redirect_to root_url, notice: 'Project was successfully updated.' }
         format.json { render :show, status: :ok, location: @project }
         format.js { render :action => "create" }
       else

@@ -77,7 +77,7 @@ div {
 }
 .homeBackground h1 {
 
-  font-family: 'Tangerine';
+  font-family: 'lora';
   font-size: 80px;
   text-shadow: 4px 4px 4px black;
 }
@@ -93,4 +93,22 @@ div {
 #bodyText{
 
   text-align: justify;
+}
+.homePageImg {
+  background: url("homePage.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  min-height: 100%;
+  min-width: 1024px;
+  
+  /* Set up proportionate scaling */
+  width: 100%;
+  height: auto;
+  
+  /* Set up positioning */
+  //position: fixed;
+  top: 49px;
+  left: 0;
 }

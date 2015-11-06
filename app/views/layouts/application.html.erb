@@ -21,9 +21,19 @@
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>
     <% end %>
-<div class="container">
-<%= yield %>
-</div>
+    <% if current_page?(root_path) || current_page?(projects_path) %>
+    <div class="homePageImg">
+      <div class="container">
+        <%= yield %>
+      </div>
+
+    </div>
+    <% else %>
+      <div class="container">
+        <%= yield %>
+      </div>
+    <% end %>
+
  <footer class="footer navbar-brand">
       <div class="container">
         <p class="text-center footerCss">Distracting Dreams <sup><%= Time.now.strftime "%Y" %></sup></p>
